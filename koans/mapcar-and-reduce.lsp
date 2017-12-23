@@ -27,7 +27,7 @@
      more than one list. It applies a function
      to successive elements of the lists."
   (assert-equal '(4 10 18) (mapcar #'* '(1 2 3) '(4 5 6)))
-  (assert-equal '("lisp" "koans" "are" "fun") (mapcar #'list '("lisp" "are") '("koans" "fun"))))
+  (assert-equal '(("lisp" "koans") ("are" "fun")) (mapcar #'list '("lisp" "are") '("koans" "fun"))))
 
 
 (define-test test-transpose-using-mapcar
@@ -60,7 +60,7 @@
     "The keyword :from-end allows us to apply
      reduce from right to left."
   (assert-equal 10 (reduce #'+ '(1 2 3 4) :from-end t))
-  (assert-equal 64 (reduce #'expt '(2 3 2) :from-end t)))
+  (assert-equal 512 (reduce #'expt '(2 3 2) :from-end t)))
 
 
 (define-test test-reduce-with-initial-value
