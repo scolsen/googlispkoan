@@ -17,9 +17,19 @@
 
 (define-condition triangle-error  (error) ())
 
-(defun triangle (a b c)
-  :write-me)
+(defun pythag (a b)
+  (+ (expt a 2) (expt b 2)))
 
+(defun pythag? (a b c)
+  (if (= (pythag a b) (expt c 2))
+      (t) (nil)))
+
+(defun triangle (a b c)
+  (cond ((or (< a 1) (< b 1) (< c 1)) (make-condition 'triangle-error))
+        ((or (>= a (+ b c)) (>= b (+ a c)) (>= c (+ a b))) (make-condition 'triangle-error))
+        ((and (= a b) (= b c)) :equilateral)
+        ((or (= a b) (= b c) (= a c)) :isosceles)
+        (t :scalene)))
 
 (define-test test-equilateral-triangles-have-equal-sides
     (assert-equal :equilateral (triangle 2 2 2))
